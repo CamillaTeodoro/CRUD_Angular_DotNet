@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<EmpresaContext>(options => options.UseSqlServer());
+builder.Services.AddDbContext<Context>(options => options.UseSqlServer());
 
 var app = builder.Build();
 
