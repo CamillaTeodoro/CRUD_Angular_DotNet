@@ -1,0 +1,1 @@
+C:\projects\CRUD_Angular_DotNet\Crud\crud.client\obj\Debug\crud.client.esproj.CoreCompileInputs.cache
