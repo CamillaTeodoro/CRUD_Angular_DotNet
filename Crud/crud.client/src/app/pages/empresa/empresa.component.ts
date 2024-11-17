@@ -22,14 +22,41 @@ export class EmpresaComponent {
 
   constructor(private http: HttpClient) {}
 
-  
-
   // Função de busca
   buscar() {
-    console.log('Buscando por:', this.searchQuery);
-    this.showForm = true;  
-    this.isEditMode = true; 
-    this.formData = {empresaId: 0, cnpj: '12345678000195', nome: 'Empresa Teste', cep: '12345678' }; 
+    console.log('Buscando por:', this.searchQuery); 
+    this.isEditMode = false; 
+    const params: any = {};
+    if (this.isCNPJ(this.searchQuery)) {
+      params.cnpj = this.searchQuery;
+    } else {
+      params.nome = this.searchQuery;
+    }
+
+    this.http
+      .get<Empresa | Empresa[]>('/api/empresas/search', { params })
+      .subscribe(
+        (response: any) => {
+          if (Array.isArray(response)) {
+            if (response.length > 0) {
+              this.empresas = response;
+            } else {
+              alert('Nenhuma empresa encontrada.');
+            }
+          } else {
+            // Se a resposta for uma única empresa
+            this.empresas = [response];
+          }
+        },
+        (error) => {
+          console.error('Erro ao buscar empresa', error);
+          alert('Erro ao buscar empresa');
+        }
+      );
+  }
+
+  isCNPJ(query: string): boolean {
+    return query.length === 14 && !isNaN(Number(query));
   }
 
   deletar() {
