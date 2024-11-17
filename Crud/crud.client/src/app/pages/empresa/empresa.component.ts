@@ -39,16 +39,13 @@ export class EmpresaComponent {
 
   // Função para cadastrar uma nova empresa
     cadastrarEmpresa() {
-
-      this.showForm = true;
+    this.showForm = true;
     this.isEditMode = false;
     this.formData = {empresaId: 0, cnpj: '', nome: '', cep: '' }; 
-
     }
   
 
   cadastrarFornecedor() {
-    console.log('Abrindo formulário para cadastrar fornecedor');
     this.showForm = true;
     this.isEditMode = false;
     this.formData = {empresaId: 0, cnpj: '', nome: '', cep: '' }; 
@@ -75,18 +72,29 @@ export class EmpresaComponent {
   }
 
   // Função para salvar dados
-  salvar() {
 
+  salvar(): void {
+    if (this.isEditMode) {
+      this.editar();
+    } else {
+      this.cadastrar();
+    }
+    this.formData = {empresaId: 0, cnpj: '', nome: '', cep: '' };
+  }
+  cadastrar() {
       this.http.post<Empresa>("/api/empresas", this.formData)
       .subscribe(
         (response) => {
+          alert("Empresa cadastrada com sucesso!");
           console.log('Empresa cadastrada com sucesso!', response);
         },
         (error) => {
           console.error('Erro ao cadastrar empresa:', error);
         }
       );
-   
-    
+  }
+
+  editar(): void {
+    console.log('Edição de empresa', this.formData);
   }
 }

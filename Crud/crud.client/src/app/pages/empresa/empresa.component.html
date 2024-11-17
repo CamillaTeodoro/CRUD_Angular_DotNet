@@ -1,0 +1,123 @@
+<div class="container">
+  <!-- Barra de Busca -->
+  <mat-form-field class="search-bar" appearance="outline">
+    <mat-label>Buscar Empresa</mat-label>
+    <input
+      matInput
+      [(ngModel)]="searchQuery"
+      placeholder="Digite o nome ou CNPJ"
+    />
+    <button mat-icon-button matSuffix color="primary" (click)="buscar()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <!-- Botões -->
+  <div class="button-group">
+    <button mat-raised-button color="warn" (click)="deletar()">Deletar</button>
+    <button mat-raised-button color="primary" (click)="cadastrarEmpresa()">
+      Cadastrar Nova Empresa
+    </button>
+    <button mat-raised-button color="primary" (click)="cadastrarFornecedor()">
+      Cadastrar Fornecedor
+    </button>
+    <button mat-raised-button color="primary" (click)="listarFornecedores()">
+      Listar Fornecedores
+    </button>
+    <button mat-raised-button color="primary" (click)="listarEmpresas()">
+      Listar Empresas
+    </button>
+  </div>
+
+  <!-- Formulário -->
+  <div class="form-container" *ngIf="showForm">
+    <h2>
+      {{ isEditMode ? "Editar Empresa" : "Cadastrar Empresa" }}
+    </h2>
+    <form #empresaForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>CNPJ</mat-label>
+        <input
+          matInput
+          [(ngModel)]="formData.cnpj"
+          name="cnpj"
+          maxlength="14"
+          pattern="[0-9]{14}"
+          required
+          #cnpj="ngModel"
+        />
+        <div *ngIf="cnpj.invalid && cnpj.touched" class="error-message">
+          <small *ngIf="cnpj.errors?.['required']">CNPJ é obrigatório.</small>
+          <small *ngIf="cnpj.errors?.['pattern']"
+            >CNPJ deve conter 14 números.</small
+          >
+        </div>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input
+          matInput
+          [(ngModel)]="formData.nome"
+          name="nome"
+          required
+          #nome="ngModel"
+        />
+        <div *ngIf="nome.invalid && nome.touched" class="error-message">
+          <small *ngIf="nome.errors?.['required']">Nome é obrigatório.</small>
+        </div>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>CEP</mat-label>
+        <input
+          matInput
+          [(ngModel)]="formData.cep"
+          name="cep"
+          maxlength="8"
+          pattern="[0-9]{8}"
+          required
+          #cep="ngModel"
+        />
+        <div *ngIf="cep.invalid && cep.touched" class="error-message">
+          <small *ngIf="cep.errors?.['required']">CEP é obrigatório.</small>
+          <small *ngIf="cep.errors?.['pattern']"
+            >CEP deve conter 8 números.</small
+          >
+        </div>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="salvar()"
+        [disabled]="empresaForm.invalid"
+      >
+        {{ isEditMode ? "Salvar Alterações" : "Cadastrar" }}
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="empresas.length > 0" class="table-container">
+    <mat-table [dataSource]="empresas">
+      <ng-container matColumnDef="cnpj">
+        <mat-header-cell *matHeaderCellDef>CNPJ</mat-header-cell>
+        <mat-cell *matCellDef="let empresa">{{ empresa.cnpj }}</mat-cell>
+      </ng-container>
+
+      >
+      <ng-container matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+        <mat-cell *matCellDef="let empresa">{{ empresa.nome }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cep">
+        <mat-header-cell *matHeaderCellDef>CEP</mat-header-cell>
+        <mat-cell *matCellDef="let empresa">{{ empresa.cep }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>

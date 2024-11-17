@@ -13,7 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './pages/index/index.component';
 import { HeaderComponent } from './components/header/header.component';
-import { EmpresaComponent } from './components/empresa/empresa.component';
+import { EmpresaComponent } from './pages/empresa/empresa.component';
 
 @NgModule({
   declarations: [

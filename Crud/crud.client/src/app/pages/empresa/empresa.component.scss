@@ -49,3 +49,34 @@
       }
     }
   }
+
+  .table-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-table {
+    width: 100%;
+  }
+  
+  mat-header-cell, mat-cell {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  mat-header-row {
+    background-color: #f0f0f0;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  input:focus::placeholder {
+    opacity: 0;
+  }
