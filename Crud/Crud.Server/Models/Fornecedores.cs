@@ -31,7 +31,7 @@ namespace Crud.Server.Models
         public string Rg { get; set; } = "";
 
         [Column]
-        public DateTime DataNascimento { get; set; }
+        public DateOnly DataNascimento { get; set; }
 
         public List<Empresas> Empresa { get; } = [];
     }
