@@ -1,0 +1,20 @@
+.container {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 600px;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  
+    .title {
+      color: #3804d3; 
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  
+    .description {
+      color: #444; 
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+  }

@@ -1,0 +1,31 @@
+
+.logo {
+    color: rgb(56, 4, 211); 
+    text-decoration: none;
+    font-size: 24px; 
+    font-weight: bold; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+      
+.spacer {
+    flex: 1 1 auto;
+}
+
+.header{
+    height: 100px;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 15px -6px rgba(0,0,0,1);
+    -webkit-box-shadow: 0px 3px 19px -6px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 3px 19px -6px rgba(0,0,0,1);
+}
+      
+.custom-link {
+    background-color: #feb626;
+    margin-right: 8px;
+    border-radius: 8px;
+    padding: 10px;
+    color: rgb(56, 4, 211) ;
+    text-decoration: none ;
+    font-size: 18px;
+}
+
