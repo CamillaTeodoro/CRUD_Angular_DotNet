@@ -75,3 +75,29 @@
     </form>
   </div>
 </div>
+
+<div *ngIf="empresas.length > 0" class="table-container">
+  <mat-table [dataSource]="empresas">
+    <!-- CNPJ Column -->
+    <ng-container matColumnDef="cnpj">
+      <mat-header-cell *matHeaderCellDef>CNPJ</mat-header-cell>
+      <mat-cell *matCellDef="let empresa">{{ empresa.cnpj }}</mat-cell>
+    </ng-container>
+
+    <!-- Nome Column -->
+    <ng-container matColumnDef="nome">
+      <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+      <mat-cell *matCellDef="let empresa">{{ empresa.nome }}</mat-cell>
+    </ng-container>
+
+    <!-- CEP Column -->
+    <ng-container matColumnDef="cep">
+      <mat-header-cell *matHeaderCellDef>CEP</mat-header-cell>
+      <mat-cell *matCellDef="let empresa">{{ empresa.cep }}</mat-cell>
+    </ng-container>
+
+    <!-- Header and Row -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
