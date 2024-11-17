@@ -17,6 +17,9 @@ export class EmpresaComponent {
     nome: '',
     cep: ''
   };
+  editCnpj: string = '';
+  showCnpjInput = false;
+  showList = false;
   empresas: Empresa[] = [];
   displayedColumns: string[] = ['cnpj', 'nome', 'cep'];
 
@@ -67,10 +70,42 @@ export class EmpresaComponent {
   // Função para cadastrar uma nova empresa
     cadastrarEmpresa() {
     this.showForm = true;
+    this.showCnpjInput = false;
     this.isEditMode = false;
+    this.showList = false;
     this.formData = {empresaId: 0, cnpj: '', nome: '', cep: '' }; 
     }
   
+    editarEmpresa() {
+      this.showList = false;
+      this.showCnpjInput = true;
+      this.showForm = false;
+    }
+  
+    // Buscar empresa por CNPJ após digitar
+    buscarEmpresaPorCnpj() {
+      if (!this.isCNPJ(this.editCnpj)) {
+        alert('CNPJ inválido!');
+        return;
+      }
+  
+      this.http.get<Empresa>('/api/empresas/search', { params: { cnpj: this.editCnpj } }).subscribe(
+        (response: any) => {
+          if (response) {
+            this.formData = response; 
+            this.isEditMode = true; 
+            this.showForm = true; 
+            this.showCnpjInput = false; 
+          } else {
+            alert('Empresa não encontrada.');
+          }
+        },
+        (error) => {
+          console.error('Erro ao buscar empresa', error);
+          alert('Erro ao buscar empresa');
+        }
+      );
+    }
 
   cadastrarFornecedor() {
     this.showForm = true;
@@ -86,6 +121,9 @@ export class EmpresaComponent {
 
   // Função para listar empresas
   listarEmpresas() {
+    this.showForm = false;
+    this.showList = true;
+    this.showCnpjInput = false;
     this.http.get<Empresa[]>("/api/empresas").subscribe(
       (response) => {
         console.log('Empresa listada com sucesso!', response);
@@ -123,5 +161,15 @@ export class EmpresaComponent {
 
   editar(): void {
     console.log('Edição de empresa', this.formData);
+    this.http.put<Empresa>(`/api/empresas/${this.formData.empresaId}`, this.formData)
+      .subscribe(
+        (response) => {
+          alert("Empresa atualizada com sucesso!");
+          console.log('Empresa atualizada com sucesso!', response);
+        },
+        (error) => {
+          console.error('Erro ao atualizar empresa:', error);
+        }
+      );
   }
 }

@@ -18,6 +18,9 @@
     <button mat-raised-button color="primary" (click)="cadastrarEmpresa()">
       Cadastrar Nova Empresa
     </button>
+    <button mat-raised-button color="primary" (click)="editarEmpresa()">
+      Editar Empresa
+    </button>
     <button mat-raised-button color="primary" (click)="cadastrarFornecedor()">
       Cadastrar Fornecedor
     </button>
@@ -26,6 +29,32 @@
     </button>
     <button mat-raised-button color="primary" (click)="listarEmpresas()">
       Listar Empresas
+    </button>
+  </div>
+
+  <!-- Busca empresa por CNPJ para editar-->
+  <div class="cnpj-input" *ngIf="showCnpjInput">
+    <mat-form-field appearance="fill">
+      <mat-label>CNPJ</mat-label>
+      <input
+        matInput
+        [(ngModel)]="editCnpj"
+        name="editCnpj"
+        maxlength="14"
+        pattern="[0-9]{14}"
+        required
+        #cnpj="ngModel"
+      />
+      <div *ngIf="cnpj.invalid && cnpj.touched" class="error-message">
+        <small *ngIf="cnpj.errors?.['required']">CNPJ é obrigatório.</small>
+        <small *ngIf="cnpj.errors?.['pattern']">
+          CNPJ deve conter 14 números.
+        </small>
+      </div>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="buscarEmpresaPorCnpj()">
+      Buscar
     </button>
   </div>
 
@@ -98,7 +127,7 @@
     </form>
   </div>
 
-  <div *ngIf="empresas.length > 0" class="table-container">
+  <div *ngIf="empresas.length > 0 && showList" class="table-container">
     <mat-table [dataSource]="empresas">
       <ng-container matColumnDef="cnpj">
         <mat-header-cell *matHeaderCellDef>CNPJ</mat-header-cell>
