@@ -1,0 +1,86 @@
+.container {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin: 20px auto;
+    max-width: 900px;
+    text-align: center;
+  
+    .search-bar {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+  
+      button {
+        flex: 1;
+        max-width: 48%;
+        padding: 10px;
+      }
+    }
+  
+    .form-container {
+      margin-top: 30px;
+      text-align: left;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+  
+      h2 {
+        text-align: center;
+        color: #3804d3;
+        margin-bottom: 30px;
+      }
+  
+      mat-form-field {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+  
+      button {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #feb626;
+        width: 100px;
+      }
+    }
+  }
+
+  .table-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-table {
+    width: 100%;
+  }
+  
+  mat-header-cell, mat-cell {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  mat-header-row {
+    background-color: #f0f0f0;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  input:focus::placeholder {
+    opacity: 0;
+  }
+
+  .cnpj-input{
+    margin-top: 30px;
+  }
