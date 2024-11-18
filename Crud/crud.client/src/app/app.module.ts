@@ -14,13 +14,15 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './pages/index/index.component';
 import { HeaderComponent } from './components/header/header.component';
 import { EmpresaComponent } from './pages/empresa/empresa.component';
+import { FornecedoresComponent } from './pages/fornecedores/fornecedores.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent, 
     HeaderComponent, 
-    EmpresaComponent,
+    EmpresaComponent, 
+    FornecedoresComponent,
     
   ],
   imports: [
