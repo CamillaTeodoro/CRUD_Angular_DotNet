@@ -115,16 +115,17 @@ namespace Crud.Server.Controllers
         }
 
         // DELETE: api/Empresas/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmpresas(int id)
+        [HttpDelete("{cnpj}")]
+        public async Task<IActionResult> DeleteEmpresas(string cnpj)
         {
-            var empresas = await _context.Empresas.FindAsync(id);
-            if (empresas == null)
+            var empresa = await _context.Empresas.FirstOrDefaultAsync(e => e.Cnpj == cnpj); ;
+            if (empresa == null)
             {
                 return NotFound();
             }
+            
 
-            _context.Empresas.Remove(empresas);
+            _context.Empresas.Remove(empresa);
             await _context.SaveChangesAsync();
 
             return NoContent();

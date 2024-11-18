@@ -34,6 +34,7 @@
 
   <!-- Busca empresa por CNPJ para editar-->
   <div class="cnpj-input" *ngIf="showCnpjInput">
+    <h2>{{ isDeleting ? "Deletar Empresa" : "Editar Empresa" }}</h2>
     <mat-form-field appearance="fill">
       <mat-label>CNPJ</mat-label>
       <input
@@ -47,14 +48,18 @@
       />
       <div *ngIf="cnpj.invalid && cnpj.touched" class="error-message">
         <small *ngIf="cnpj.errors?.['required']">CNPJ é obrigatório.</small>
-        <small *ngIf="cnpj.errors?.['pattern']">
-          CNPJ deve conter 14 números.
-        </small>
+        <small *ngIf="cnpj.errors?.['pattern']"
+          >CNPJ deve conter 14 números.</small
+        >
       </div>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="buscarEmpresaPorCnpj()">
-      Buscar
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="isDeleting ? deletarEmpresaPorCnpj() : buscarEmpresaPorCnpj()"
+    >
+      {{ isDeleting ? "Deletar" : "Buscar" }}
     </button>
   </div>
 

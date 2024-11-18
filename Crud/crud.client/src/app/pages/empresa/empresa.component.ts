@@ -20,6 +20,7 @@ export class EmpresaComponent {
   editCnpj: string = '';
   showCnpjInput = false;
   showList = false;
+  isDeleting = false;
   empresas: Empresa[] = [];
   displayedColumns: string[] = ['cnpj', 'nome', 'cep'];
 
@@ -62,9 +63,35 @@ export class EmpresaComponent {
     return query.length === 14 && !isNaN(Number(query));
   }
 
-  deletar() {
-    console.log('Deletando item...');
+  deletar(): void {
+    this.showCnpjInput = true; 
+    this.editCnpj="";
+    this.isDeleting = true; 
+    this.showForm = false;
+    this.showList = false;
+  }
 
+  deletarEmpresaPorCnpj(){
+    if (!this.editCnpj || this.editCnpj.length !== 14) {
+      alert('Por favor, insira um CNPJ válido.');
+      return;
+    }
+
+    this.http.delete(`/api/empresas/${this.editCnpj}`).subscribe(
+      () => {
+        alert('Empresa deletada com sucesso!');
+        this.showCnpjInput = false; 
+      },
+      (error) => {
+        console.error('Erro ao deletar empresa:', error);
+        if (error.status === 404) {
+          alert('Empresa não encontrada.');
+        } else {
+          alert('Erro ao deletar empresa. Tente novamente mais tarde.');
+        }
+      }
+    );
+    this.editCnpj = '';
   }
 
   // Função para cadastrar uma nova empresa
